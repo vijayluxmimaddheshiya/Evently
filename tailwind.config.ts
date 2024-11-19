@@ -1,4 +1,3 @@
-
 /** @type {import('tailwindcss').Config} */
 import { withUt } from 'uploadthing/tw';
 
