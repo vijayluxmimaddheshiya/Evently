@@ -1,13 +1,12 @@
+
 import EventForm from "@/components/shared/EventForm"
-import { auth } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs";
 
-export default async function CreateEvent() {
-  const { userId } = await auth();
+const CreateEvent = () => {
+ const  { sessionClaims }  = auth();
+ const userId = sessionClaims?.userId as string
 
-  if (!userId) {
-    // Handle the case where userId is null (e.g., redirect to login)
-    throw new Error("User is not authenticated");
-  }
+ 
 
   return (
     <>
@@ -17,8 +16,10 @@ export default async function CreateEvent() {
 
       <div className="wrapper my-8">
         <EventForm userId={userId} type="Create" />
+
       </div>
     </>
-  );
+  )
 }
 
+export default CreateEvent
